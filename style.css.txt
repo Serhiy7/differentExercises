@@ -1,0 +1,112 @@
+.calc {
+  margin: 50px auto;
+  width: 750px;
+  height: 400px;
+  border-radius: 20px;
+  background-color: #000;
+  color: #fff;
+  font-family: Arial;
+  padding: 18px;
+  box-shadow: 4px 4px 4px #4f4f4f;
+  position: relative;
+}
+
+.calc-screen {
+  /* height: 125px;
+  padding: 10px; */
+  display: grid;
+  align-items: end;
+  justify-items: end;
+  margin-bottom: 10px;
+}
+
+.calc-screen div {
+  font-size: 50px;
+  margin: 0;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(10, 69px);
+  grid-template-rows: repeat(5, 61px);
+  /* grid-template-areas:
+    "left_parenthesis right_parenthesis mc mplus mminus mr ac plus-minus percent division"
+    "2nd x2 x3 xY eX 10X seven eight nine myltiply"
+    "1/x 2rx 3rx yrx in log10 four five siz minus"
+    "x! sin cos tan e EE one two three plus"
+    "rad sinh cosh tanh pi-symbol rand zero zero dot equal"; */
+  gap: 7px;
+  justify-items: center;
+  position: absolute;
+  top: 90px;
+  left: 16px;
+}
+
+.btn {
+  width: 60px;
+  height: 60px;
+  background-color: #333;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 60px;
+  font-size: 25px;
+  cursor: pointer;
+  user-select: none; /*нельзя выбрать текст внутри элемента*/
+}
+
+/* .left_parenthesis {
+  grid-area: left_parenthesis;
+}
+.right_parenthesis {
+  grid-area: right_parenthesis;
+}
+
+.mc {
+  grid-area: mc;
+}
+.mplus {
+  grid-area: mplus;
+}
+.mminus {
+  grid-area: mminus;
+}
+.mr {
+  grid-area: mr;
+} */
+
+.btn.zero {
+  /* grid-area: zero; */
+  grid-column: span 2; /* Кнопка будет занимать две колонки */
+  width: 100%;
+  border-radius: 34px;
+}
+
+.btn:hover {
+  filter: brightness(120%); /*яркость*/
+}
+
+.btn:active {
+  filter: brightness(90%); /*яркость*/
+}
+
+.btn.bg-grey {
+  background-color: #a6a6a6;
+}
+
+.btn.bg-orange {
+  background-color: #ff9501;
+}
+
+.subscript {
+  font-size: 10px;
+  vertical-align: sub;
+}
+
+.superscript {
+  font-size: 12px;
+  vertical-align: super;
+}
+
+.pi-symbol {
+  font-size: 24px;
+}
