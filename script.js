@@ -1,5 +1,3 @@
-
-
 let a = ""; // Первое число
 let b = ""; // Второе число
 let sign = ""; // Знак операции
@@ -37,6 +35,24 @@ const operations = {
   "X": (x, y) => x * y,
   "/": (x, y) => (y === 0 ? "Error" : x / y),
 };
+
+// Сохранение истории
+function saveToHistory(operation) {
+  let history = JSON.parse(localStorage.getItem("calcHistory")) || [];
+  history.push(operation);
+  if (history.length > 5) history.shift();
+  localStorage.setItem("calcHistory", JSON.stringify(history));
+}
+
+// Отображение истории
+const historyElement = document.createElement("div");
+historyElement.id = "calc-history";
+document.body.appendChild(historyElement);
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem("calcHistory")) || [];
+  historyElement.innerHTML = history.map(op => `<div>${op}</div>`).join("");
+}
 
 // Обработка нажатий
 document.querySelector(".buttons").onclick = (event) => {
@@ -79,9 +95,18 @@ document.querySelector(".buttons").onclick = (event) => {
 
   if (key === "=") {
     if (b === "") b = a;
-    a = operations[sign]?.(+a, +b) ?? "Error";
+    const result = operations[sign]?.(+a, +b) ?? "Error";
+    a = result;
     finish = true;
     updateScreen(a);
+
+    // Сохраняем операцию в историю
+    const operation = `${a} ${sign} ${b} = ${result}`;
+    saveToHistory(operation);
+
+    // Обновляем отображение истории
+    renderHistory();
+
     logState();
   }
 };
@@ -89,3 +114,14 @@ document.querySelector(".buttons").onclick = (event) => {
 // Очистка
 document.querySelector(".ac").onclick = clearAll;
 
+// Кнопка для очистки истории
+const clearHistoryButton = document.createElement("button");
+clearHistoryButton.textContent = "Очистить историю";
+clearHistoryButton.addEventListener("click", () => {
+  localStorage.removeItem("calcHistory");
+  renderHistory();
+});
+document.body.appendChild(clearHistoryButton);
+
+// Загружаем историю при загрузке страницы
+renderHistory();
