@@ -89,3 +89,4 @@ document.querySelector(".buttons").onclick = (event) => {
 // Очистка
 document.querySelector(".ac").onclick = clearAll;
 
+апа
