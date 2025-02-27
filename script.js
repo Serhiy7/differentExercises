@@ -54,51 +54,58 @@ function renderHistory() {
 
 // Обработка нажатий
 document.querySelector(".buttons").onclick = (event) => {
+  // Проверяем, что нажата кнопка с классом "btn" и это не кнопка "AC"
   if (!event.target.classList.contains("btn") || event.target.classList.contains("ac")) return;
 
+  // Получаем текст нажатой кнопки
   const key = event.target.textContent;
 
+  // Если нажата цифра или точка
   if (digit.includes(key)) {
     if (b === "" && sign === "") {
-      a += key;
+      a += key; // Добавляем цифру к первому числу
     } else if (a !== "" && b !== "" && finish) {
-      b = key;
+      b = key; // Начинаем ввод нового числа после завершения предыдущей операции
       finish = false;
     } else {
-      b += key;
+      b += key; // Добавляем цифру ко второму числу
     }
-    updateScreen(b === "" ? a : b);
-    logState();
+    updateScreen(b === "" ? a : b); // Обновляем экран
+    logState(); // Логируем состояние
     return;
   }
 
+  // Если нажата математическая операция (+, -, *, /)
   if (action.includes(key)) {
-    sign = key;
-    updateScreen(sign);
-    logState();
+    sign = key; // Сохраняем знак операции
+    updateScreen(sign); // Обновляем экран
+    logState(); // Логируем состояние
     return;
   }
 
+  // Если нажата кнопка "%" (процент)
   if (key === percent && a !== "") {
-    a = a / 100;
-    updateScreen(a);
+    a = a / 100; // Преобразуем число в проценты
+    updateScreen(a); // Обновляем экран
     return;
   }
 
+  // Если нажата кнопка "+/-" (смена знака)
   if (key === changeSign && a !== "") {
-    a = a * -1;
-    updateScreen(a);
+    a = a * -1; // Меняем знак числа
+    updateScreen(a); // Обновляем экран
     return;
   }
 
+  // Если нажата кнопка "=" (вычисление)
   if (key === "=") {
-    if (b === "") b = a;
+    if (b === "") b = a; // Если второе число не введено, используем первое число
     const originalA = a; // Сохраняем оригинальное значение a
     const originalB = b; // Сохраняем оригинальное значение b
-    const result = operations[sign]?.(+a, +b) ?? "Error";
-    a = result;
-    finish = true;
-    updateScreen(a);
+    const result = operations[sign]?.(+a, +b) ?? "Error"; // Вычисляем результат
+    a = result; // Сохраняем результат в переменную a
+    finish = true; // Устанавливаем флаг завершения операции
+    updateScreen(a); // Обновляем экран
 
     // Сохраняем операцию в историю с оригинальными значениями
     const operation = `${originalA} ${sign} ${originalB} = ${result}`;
@@ -107,6 +114,7 @@ document.querySelector(".buttons").onclick = (event) => {
     // Обновляем отображение истории
     renderHistory();
 
+    // Логируем состояние
     logState();
   }
 };
