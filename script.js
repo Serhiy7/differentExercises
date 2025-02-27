@@ -124,4 +124,4 @@ clearHistoryButton.addEventListener("click", () => {
 document.body.appendChild(clearHistoryButton);
 
 // Загружаем историю при загрузке страницы
-renderHistory();
+renderHistory(); 
