@@ -1,7 +1,7 @@
 .calc {
   margin: 50px auto;
   width: 750px;
-  height: 400px;
+  height: 430px;
   border-radius: 20px;
   background-color: #000;
   color: #fff;
@@ -10,19 +10,40 @@
   position: relative;
 }
 
-.calc-screen {
+/* .calc-screen {
   /* height: 125px;
   padding: 10px; */
-  display: grid;
+  /* display: grid;
   align-items: end;
   justify-items: end;
   margin-bottom: 10px;
+} */ 
+.calc-screen {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Две колонки: история и экран */
+  gap: 10px; /* Расстояние между историей и экраном */
+  align-items: end;
+  margin-bottom: 10px;
 }
 
-.calc-screen div {
+.history {
+  grid-column: 1; /* История в первой колонке */
+  text-align: left; /* Текст истории выравниваем по левому краю */
+  font-size: 14px; /* Размер текста истории */
+  color: #666; /* Цвет текста истории */
+  /* overflow-y: auto; Добавляем прокрутку, если история слишком длинная */
+  /* max-height: 100px; Ограничиваем высоту блока истории */
+}
+
+.display {
+  grid-column: 2; /* Основной экран во второй колонке */
+  text-align: right; /* Текст экрана выравниваем по правому краю */
+  font-size: 24px; /* Размер текста экрана */
   font-size: 50px;
   margin: 0;
 }
+
+
 
 .buttons {
   display: grid;
@@ -37,7 +58,7 @@
   gap: 7px;
   justify-items: center;
   position: absolute;
-  top: 90px;
+  top: 115px;
   left: 16px;
 }
 
