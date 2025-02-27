@@ -9,7 +9,7 @@ const percent = "%";
 const changeSign = "+/-";
 
 // Экран
-const out = document.querySelector(".calc-screen div");
+const out = document.querySelector(".calc-screen .display");
 
 // Очистка всего
 function clearAll() {
@@ -45,9 +45,7 @@ function saveToHistory(operation) {
 }
 
 // Отображение истории
-const historyElement = document.createElement("div");
-historyElement.id = "calc-history";
-document.body.appendChild(historyElement);
+const historyElement = document.querySelector(".calc-screen .history");
 
 function renderHistory() {
   const history = JSON.parse(localStorage.getItem("calcHistory")) || [];
@@ -95,13 +93,15 @@ document.querySelector(".buttons").onclick = (event) => {
 
   if (key === "=") {
     if (b === "") b = a;
+    const originalA = a; // Сохраняем оригинальное значение a
+    const originalB = b; // Сохраняем оригинальное значение b
     const result = operations[sign]?.(+a, +b) ?? "Error";
     a = result;
     finish = true;
     updateScreen(a);
 
-    // Сохраняем операцию в историю
-    const operation = `${a} ${sign} ${b} = ${result}`;
+    // Сохраняем операцию в историю с оригинальными значениями
+    const operation = `${originalA} ${sign} ${originalB} = ${result}`;
     saveToHistory(operation);
 
     // Обновляем отображение истории
