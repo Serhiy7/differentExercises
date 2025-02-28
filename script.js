@@ -131,5 +131,18 @@ clearHistoryButton.addEventListener("click", () => {
 });
 document.body.appendChild(clearHistoryButton);
 
+document.getElementById("change-bg").addEventListener("click", () => {
+  document.body.style.backgroundColor = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+});
+
+const box = document.querySelector(".box");
+
+box.addEventListener("mouseover", () => {
+  box.style.background = "linear-gradient(45deg, #ff9a9e, #fad0c4)";
+});
+
+box.addEventListener("mouseout", () => {
+  box.style.background = "#f0f0f0";
+});
 // Загружаем историю при загрузке страницы
 renderHistory(); 
