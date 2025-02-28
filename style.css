@@ -74,25 +74,7 @@
   user-select: none; /*нельзя выбрать текст внутри элемента*/
 }
 
-/* .left_parenthesis {
-  grid-area: left_parenthesis;
-}
-.right_parenthesis {
-  grid-area: right_parenthesis;
-}
 
-.mc {
-  grid-area: mc;
-}
-.mplus {
-  grid-area: mplus;
-}
-.mminus {
-  grid-area: mminus;
-}
-.mr {
-  grid-area: mr;
-} */
 
 .btn.zero {
   /* grid-area: zero; */
