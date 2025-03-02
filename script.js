@@ -144,5 +144,5 @@ box.addEventListener("mouseover", () => {
 box.addEventListener("mouseout", () => {
   box.style.background = "#f0f0f0";
 });
-Загружаем историю при загрузке страницы
+//Загружаем историю при загрузке страницы
 renderHistory(); 
