@@ -31,3 +31,42 @@
         isPaused = false;
     });
 </script>
+
+<input type="text" id="item-input" placeholder="Введите текст">
+<button id="add-item">Добавить</button>
+<ul id="item-list"></ul>
+
+<style>
+    #item-list li {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    #item-list li.visible {
+        opacity: 1;
+    }
+</style>
+
+<script>
+    document.getElementById("add-item").addEventListener("click", () => {
+        const text = document.getElementById("item-input").value.trim();
+        if (!text) return alert("Введите текст!");
+        
+        const li = document.createElement("li");
+        li.textContent = text;
+        
+        // Добавляем анимацию появления
+        document.getElementById("item-list").appendChild(li);
+        
+        // Используем setTimeout, чтобы элемент стал видимым через 0.1 секунды
+        setTimeout(() => li.classList.add('visible'), 10);
+        
+        // Слушатель клика для удаления элемента
+        li.addEventListener("click", () => {
+            li.classList.remove('visible'); // Начинаем анимацию исчезновения
+            setTimeout(() => li.remove(), 500); // Удаляем элемент через 500ms (время анимации)
+        });
+
+        document.getElementById("item-input").value = "";
+    });
+</script>
