@@ -1,4 +1,4 @@
-<div id="timer">0</div>
+<!-- <div id="timer">0</div>
 <button id="start">Старт</button>
 <button id="pause">Пауза</button>
 <button id="reset">Сброс</button>
@@ -69,4 +69,95 @@
 
         document.getElementById("item-input").value = "";
     });
-</script>
+</script> -->
+
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор случайных цитат</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .quote-box {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        #favorite-quotes {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quote-box" id="quote"></div>
+    <button id="new-quote">Новая цитата</button>
+    <button id="save-favorite">Сохранить в избранное</button>
+
+    <h3>Избранные цитаты:</h3>
+    <div id="favorite-quotes"></div>
+
+    <script>
+        // Массив с цитатами
+        const quotes = [
+            "Будь собой, остальные роли уже заняты. — Оскар Уайльд",
+            "Жизнь — это 10% того, что с тобой происходит, и 90% того, как ты на это реагируешь. — Чарльз Свиндолл",
+            "Всё приходит в своё время для тех, кто умеет ждать. — Лев Толстой"
+        ];
+
+        // Получаем элементы
+        const quoteBox = document.getElementById("quote");
+        const newQuoteButton = document.getElementById("new-quote");
+        const saveFavoriteButton = document.getElementById("save-favorite");
+        const favoriteQuotesContainer = document.getElementById("favorite-quotes");
+
+        // Функция для показа случайной цитаты
+        function displayRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            quoteBox.textContent = quotes[randomIndex];
+        }
+
+        // Функция для сохранения цитаты в избранное
+        function saveFavoriteQuote() {
+            const currentQuote = quoteBox.textContent;
+            if (!currentQuote) return;
+
+            let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            if (!favorites.includes(currentQuote)) {
+                favorites.push(currentQuote);
+                localStorage.setItem("favorites", JSON.stringify(favorites));
+                renderFavorites();
+            }
+        }
+
+        // Функция для отображения избранных цитат
+        function renderFavorites() {
+            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            favoriteQuotesContainer.innerHTML = favorites.map(quote => `<p>${quote}</p>`).join('');
+        }
+
+        // Добавляем обработчики событий
+        newQuoteButton.addEventListener("click", displayRandomQuote);
+        saveFavoriteButton.addEventListener("click", saveFavoriteQuote);
+
+        // Отображаем случайную цитату при загрузке
+        displayRandomQuote();
+
+        // Отображаем избранные цитаты при загрузке
+        renderFavorites();
+    </script>
+
+</body>
+</html>
