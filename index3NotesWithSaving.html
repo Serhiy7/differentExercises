@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заметки с сохранением</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #28a745;
+            color: white;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .notes-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .note-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .note-item button {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .note-item button:hover {
+            background-color: #c82333;
+        }
+        #clear-all {
+            background-color: #ffc107;
+            border: none;
+            color: white;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        #clear-all:hover {
+            background-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Заметки</h1>
+
+    <textarea id="note-input" placeholder="Введите текст заметки..."></textarea>
+    <button id="save-note">Сохранить заметку</button>
+
+    <h3>Все заметки:</h3>
+    <ul id="notes-list" class="notes-list"></ul>
+
+    <button id="clear-all">Очистить все заметки</button>
+
+    <script>
+               // Получаем элементы
+const noteInput = document.getElementById("note-input");
+const saveButton = document.getElementById("save-note");
+const notesList = document.getElementById("notes-list");
+const clearAllButton = document.getElementById("clear-all");
+
+// Загружаем заметки из localStorage
+let savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
+
+// Отображаем все заметки при загрузке страницы
+savedNotes.forEach((note, index) => {
+    const newNoteItem = document.createElement("li");
+    newNoteItem.textContent = note;
+
+    // Создаем кнопку для удаления заметки
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Удалить";
+    removeButton.addEventListener("click", () => {
+        // Удаляем заметку из массива
+        savedNotes.splice(index, 1);
+
+        // Обновляем localStorage с новым массивом
+        localStorage.setItem("notes", JSON.stringify(savedNotes));
+
+        // Удаляем заметку из DOM
+        newNoteItem.remove();
+    });
+
+    // Добавляем кнопку "Удалить" в заметку
+    newNoteItem.appendChild(removeButton);
+
+    // Добавляем заметку в список
+    notesList.appendChild(newNoteItem);
+});
+
+// Сохраняем заметку и добавляем в список
+saveButton.addEventListener("click", () => {
+    const note = noteInput.value.trim();
+    if (note) {
+        // Добавляем заметку в массив
+        savedNotes.push(note);
+
+        // Сохраняем обновленный массив заметок в localStorage
+        localStorage.setItem("notes", JSON.stringify(savedNotes));
+
+        // Создаем новый элемент li для заметки
+        const newNoteItem = document.createElement("li");
+        newNoteItem.textContent = note;
+
+        // Создаем кнопку для удаления
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Удалить";
+        removeButton.addEventListener("click", () => {
+            // Удаляем заметку из массива
+            const noteIndex = savedNotes.indexOf(note);
+            savedNotes.splice(noteIndex, 1);
+
+            // Обновляем localStorage
+            localStorage.setItem("notes", JSON.stringify(savedNotes));
+
+            // Удаляем заметку из DOM
+            newNoteItem.remove();
+        });
+
+        // Добавляем кнопку "Удалить" в заметку
+        newNoteItem.appendChild(removeButton);
+
+        // Добавляем новый элемент li в список
+        notesList.appendChild(newNoteItem);
+
+        // Очищаем поле ввода
+        noteInput.value = "";
+    }
+});
+
+// Очистить все заметки
+clearAllButton.addEventListener("click", () => {
+    // Очистка массива сохраненных заметок
+    savedNotes = [];
+
+    // Обновляем localStorage
+    localStorage.setItem("notes", JSON.stringify(savedNotes));
+
+    // Удаляем все заметки из DOM
+    notesList.innerHTML = "";
+});
+
+    </script>
+</body>
+</html>
