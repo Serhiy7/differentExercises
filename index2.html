@@ -1,6 +1,5 @@
 <input type="text" id="name-input" placeholder="Введите имя">
 <button id="save-name">Сохранить</button>
-<button id="remove-name">Удалить</button>
 <button id="clear-name">Очистить имя</button>
 <p id="saved-name"></p>
 
@@ -8,7 +7,6 @@
     const nameInput = document.getElementById("name-input");
     const saveButton = document.getElementById("save-name");
     const savedName = document.getElementById("saved-name");
-    const removeName = document.getElementById("remove-name");
     const clearName = document.getElementById("clear-name");
 
     // Загружаем имя из localStorage
@@ -22,12 +20,6 @@
             savedName.textContent = name;
             nameInput.value = "";
         }
-    });
-
-    // Удаляем имя из localStorage
-    removeName.addEventListener("click", () => {
-        localStorage.removeItem("userName");  // Удаляем правильный ключ
-        savedName.textContent = "Имя не введено";
     });
 
     // Очистить имя из input и localStorage
