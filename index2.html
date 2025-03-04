@@ -1,163 +1,21 @@
-<!-- <div id="timer">0</div>
-<button id="start">Старт</button>
-<button id="pause">Пауза</button>
-<button id="reset">Сброс</button>
-круто
+<input type="text" id="name-input" placeholder="Введите имя">
+<button id="save-name">Сохранить</button>
+<p id="saved-name"></p>
+
 <script>
-    let count = 0;
-    let timer;
-    let isPaused = false;
-    
-    document.getElementById("start").addEventListener("click", () => {
-        if (!timer || isPaused) {
-            isPaused = false;
-            timer = setInterval(() => {
-                count++;
-                document.getElementById("timer").textContent = count;
-            }, 1000);
+    const nameInput = document.getElementById("name-input");
+    const saveButton = document.getElementById("save-name");
+    const savedName = document.getElementById("saved-name");
+
+    // Загружаем имя из localStorage
+    savedName.textContent = localStorage.getItem("userName") || "Имя не введено";
+
+    saveButton.addEventListener("click", () => {
+        const name = nameInput.value.trim();
+        if (name) {
+            localStorage.setItem("userName", name);
+            savedName.textContent = name;
+            nameInput.value = "";
         }
-    });
-
-    document.getElementById("pause").addEventListener("click", () => {
-        clearInterval(timer);
-        isPaused = true;
-    });
-
-    document.getElementById("reset").addEventListener("click", () => {
-        clearInterval(timer);
-        timer = null;
-        count = 0;
-        document.getElementById("timer").textContent = count;
-        isPaused = false;
     });
 </script>
-
-<input type="text" id="item-input" placeholder="Введите текст">
-<button id="add-item">Добавить</button>
-<ul id="item-list"></ul>
-
-<style>
-    #item-list li {
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-    }
-
-    #item-list li.visible {
-        opacity: 1;
-    }
-</style>
-
-<script>
-    document.getElementById("add-item").addEventListener("click", () => {
-        const text = document.getElementById("item-input").value.trim();
-        if (!text) return alert("Введите текст!");
-        
-        const li = document.createElement("li");
-        li.textContent = text;
-        
-        // Добавляем анимацию появления
-        document.getElementById("item-list").appendChild(li);
-        
-        // Используем setTimeout, чтобы элемент стал видимым через 0.1 секунды
-        setTimeout(() => li.classList.add('visible'), 10);
-        
-        // Слушатель клика для удаления элемента
-        li.addEventListener("click", () => {
-            li.classList.remove('visible'); // Начинаем анимацию исчезновения
-            setTimeout(() => li.remove(), 500); // Удаляем элемент через 500ms (время анимации)
-        });
-
-        document.getElementById("item-input").value = "";
-    });
-</script> -->
-
-
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Генератор случайных цитат</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        .quote-box {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 10px;
-        }
-        #favorite-quotes {
-            margin-top: 30px;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="quote-box" id="quote"></div>
-    <button id="new-quote">Новая цитата</button>
-    <button id="save-favorite">Сохранить в избранное</button>
-
-    <h3>Избранные цитаты:</h3>
-    <div id="favorite-quotes"></div>
-
-    <script>
-        // Массив с цитатами
-        const quotes = [
-            "Будь собой, остальные роли уже заняты. — Оскар Уайльд",
-            "Жизнь — это 10% того, что с тобой происходит, и 90% того, как ты на это реагируешь. — Чарльз Свиндолл",
-            "Всё приходит в своё время для тех, кто умеет ждать. — Лев Толстой"
-        ];
-
-        // Получаем элементы
-        const quoteBox = document.getElementById("quote");
-        const newQuoteButton = document.getElementById("new-quote");
-        const saveFavoriteButton = document.getElementById("save-favorite");
-        const favoriteQuotesContainer = document.getElementById("favorite-quotes");
-
-        // Функция для показа случайной цитаты
-        function displayRandomQuote() {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            quoteBox.textContent = quotes[randomIndex];
-        }
-
-        // Функция для сохранения цитаты в избранное
-        function saveFavoriteQuote() {
-            const currentQuote = quoteBox.textContent;
-            if (!currentQuote) return;
-
-            let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-            if (!favorites.includes(currentQuote)) {
-                favorites.push(currentQuote);
-                localStorage.setItem("favorites", JSON.stringify(favorites));
-                renderFavorites();
-            }
-        }
-
-        // Функция для отображения избранных цитат
-        function renderFavorites() {
-            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-            favoriteQuotesContainer.innerHTML = favorites.map(quote => `<p>${quote}</p>`).join('');
-        }
-
-        // Добавляем обработчики событий
-        newQuoteButton.addEventListener("click", displayRandomQuote);
-        saveFavoriteButton.addEventListener("click", saveFavoriteQuote);
-
-        // Отображаем случайную цитату при загрузке
-        displayRandomQuote();
-
-        // Отображаем избранные цитаты при загрузке
-        renderFavorites();
-    </script>
-
-</body>
-</html>
