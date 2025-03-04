@@ -1,4 +1,4 @@
-<input type="text" id="name-input" placeholder="Введите имя">
+<!-- <input type="text" id="name-input" placeholder="Введите имя">
 <button id="save-name">Сохранить</button>
 <button id="clear-name">Очистить имя</button>
 <p id="saved-name"></p>
@@ -28,4 +28,28 @@
         savedName.textContent = "Имя не введено";  // Обновляем отображаемое имя
         nameInput.value = "";  // Очищаем поле ввода
     });
+</script> -->
+
+
+<button id="click-button">Кликни меня</button>
+<button id="reset-button">Сбросить счётчик</button>
+<p>Количество кликов: <span id="click-count">0</span></p>
+
+<script>
+ let count = localStorage.getItem("clickCount") || 0;
+ document.getElementById("click-count").textContent = count;
+
+document.getElementById("click-button").addEventListener("click", () => {
+count++;
+localStorage.setItem("clickCount", count);
+document.getElementById("click-count").textContent = count;
+})
+
+
+document.getElementById("reset-button").addEventListener("click", () => {
+    localStorage.removeItem("clickCount");
+    document.getElementById("click-count").textContent = 0;
+    count = 0;
+})
+
 </script>
