@@ -30,8 +30,9 @@
     });
 </script> -->
 
+<!-- ------------------------------------------------------------- -->
 
-<button id="click-button">Кликни меня</button>
+<!-- <button id="click-button">Кликни меня</button>
 <button id="reset-button">Сбросить счётчик</button>
 <p>Количество кликов: <span id="click-count">0</span></p>
 
@@ -51,5 +52,38 @@ document.getElementById("reset-button").addEventListener("click", () => {
     document.getElementById("click-count").textContent = 0;
     count = 0;
 })
+</script> -->
 
-</script>
+<!-- ------------------------------------------------------------- -->
+<!-- 1. Запрос списка пользователей -->
+<!-- <h1>Список пользователей</h1>
+<ul id="user-list"></ul>
+
+<script>
+    async function fetchUsers(){
+        try{
+            // Получаем данные о пользователях с API
+            const response = await fetch("https://jsonplaceholder.typicode.com/users");
+            const users = await response.json();
+
+             // Находим элемент <ul>, куда будем добавлять пользователей
+                const userList = document.getElementById("user-list");
+
+             // Проходим по каждому пользователю и создаем элемент <li>
+                users.forEach(user => {
+                    const userItem = document.createElement("li");
+                    userItem.textContent = `${user.name} (${user.email})`;
+
+                    // Добавляем элемент <li> в <ul>
+                        userList.appendChild(userItem);
+                });
+        } catch (error) {
+            console.error("Ошибка при получении данных:", error);
+        }
+    }
+
+    // Вызываем функцию для получения и отображения пользователей
+    fetchUsers();
+</script> -->
+
+<!-- ------------------------------------------------------------- -->
