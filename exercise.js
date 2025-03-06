@@ -24,3 +24,4 @@ if (this.speed > 400) {
 
 const myCar = new Car("BMW", 2020, 250);
 console.log(myCar.getCarInfo());
+myCar.increaseSpeed(20);
