@@ -1,23 +1,26 @@
-function isUnique(str) {
-  // Convert the string to lowercase to ignore letter case
-  str = str.toLowerCase();
-
-  // Create a Set to store unique characters
-  const charSet = new Set();
-
-  // Loop through each character in the string
-  for (let char of str) {
-    // If the character is already in the Set, return false
-    if (charSet.has(char)) {
-      return false;
-    }
-    // Add character to the Set
-    charSet.add(char);
-  }
-
-  // If no duplicate characters are found, return true
-  return true;
+class Car {
+  constructor (brand, year, speed) {
+  this.brand = brand;
+  this.year = year;
+  this.speed = speed;
 }
 
-console.log(isUnique("World")); // true
-console.log(isUnique("JavaScript")); // false
+getCarInfo() {
+  return `${this.brand}, ${this.year}, ${this.speed} km/ч`;
+}
+
+increaseSpeed(amount) {
+  this.speed += amount;
+  console.log(`Новая скорость: ${this.speed} км/ч`);
+
+
+// Добавляем проверку, если скорость больше 400 км/ч
+if (this.speed > 400) {
+  console.warn("Предупреждение: Скорость выше 400 км/ч! Это слишком быстро!");
+}
+}
+
+}
+
+const myCar = new Car("BMW", 2020, 250);
+console.log(myCar.getCarInfo());
