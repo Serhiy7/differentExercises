@@ -73,10 +73,16 @@
                 userDiv.classList.add("user");
                 userDiv.innerHTML = `
                     ${user.name}, ${user.age} лет, Роль: ${user.role} 
-                    <button onclick="editUser(${index})">📝 Изменить</button>
-                    <button onclick="deleteUser(${index})">🗑 Удалить</button>
+                    <button class="edit-btn">📝 Изменить</button>
+                    <button class="delete-btn">🗑 Удалить</button>
                 `;
                 userListDiv.appendChild(userDiv);
+
+                // Добавляем обработчик для кнопки "Изменить"
+                userDiv.querySelector(".edit-btn").addEventListener("click", () => editUser(index));
+
+                // Добавляем обработчик для кнопки "Удалить"
+                userDiv.querySelector(".delete-btn").addEventListener("click", () => deleteUser(index));
             });
         }
 
