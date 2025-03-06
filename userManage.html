@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление пользователями</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #user-list {
+            margin-top: 20px;
+        }
+        .user {
+            margin: 10px 0;
+        }
+        .user button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Управление пользователями</h1>
+
+    <!-- Поля для ввода данных пользователя -->
+    <input type="text" id="name-input" placeholder="Имя">
+    <input type="number" id="age-input" placeholder="Возраст">
+    <button id="add-user">Добавить</button>
+
+    <!-- Список пользователей -->
+    <div id="user-list"></div>
+
+    <script>
+        // Класс User с методами для редактирования и удаления
+        class User {
+            constructor(name, age, role = "User") {
+                this.name = name;
+                this.age = age;
+                this.role = role;
+            }
+
+            // Метод для редактирования пользователя
+            editUser(newName, newAge) {
+                this.name = newName;
+                this.age = newAge;
+            }
+
+            // Метод для удаления пользователя
+            deleteUser(usersList) {
+                const index = usersList.indexOf(this);
+                if (index !== -1) {
+                    usersList.splice(index, 1);
+                }
+            }
+        }
+
+        // Получаем элементы для работы с DOM
+        const nameInput = document.getElementById("name-input");
+        const ageInput = document.getElementById("age-input");
+        const addUserButton = document.getElementById("add-user");
+        const userListDiv = document.getElementById("user-list");
+
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Функция для отображения пользователей на странице
+        function displayUsers() {
+            userListDiv.innerHTML = "";
+            users.forEach((user, index) => {
+                const userDiv = document.createElement("div");
+                userDiv.classList.add("user");
+                userDiv.innerHTML = `
+                    ${user.name}, ${user.age} лет, Роль: ${user.role} 
+                    <button onclick="editUser(${index})">📝 Изменить</button>
+                    <button onclick="deleteUser(${index})">🗑 Удалить</button>
+                `;
+                userListDiv.appendChild(userDiv);
+            });
+        }
+
+        // Функция для добавления нового пользователя
+        function addUser() {
+            const name = nameInput.value.trim();
+            const age = parseInt(ageInput.value.trim());
+            if (name && age) {
+                const newUser = new User(name, age);
+                users.push(newUser);
+                saveUsers();
+                displayUsers();
+                nameInput.value = "";
+                ageInput.value = "";
+            } else {
+                alert("Пожалуйста, введите имя и возраст.");
+            }
+        }
+
+        // Функция для редактирования пользователя
+        function editUser(index) {
+            const user = users[index];
+            const newName = prompt("Введите новое имя:", user.name);
+            const newAge = prompt("Введите новый возраст:", user.age);
+            if (newName && newAge) {
+                user.editUser(newName, newAge);
+                saveUsers();
+                displayUsers();
+            }
+        }
+
+        // Функция для удаления пользователя
+        function deleteUser(index) {
+            const user = users[index];
+            user.deleteUser(users);
+            saveUsers();
+            displayUsers();
+        }
+
+        // Функция для сохранения пользователей в localStorage
+        function saveUsers() {
+            localStorage.setItem("users", JSON.stringify(users));
+        }
+
+        // Добавляем обработчик события для кнопки "Добавить"
+        addUserButton.addEventListener("click", addUser);
+
+        // Загружаем пользователей из localStorage при загрузке страницы
+        displayUsers();
+    </script>
+
+</body>
+</html>
