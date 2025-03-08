@@ -103,7 +103,7 @@ console.log(settings1 === settings2); // true (всегда один объек�
 
 // Проверка: изменение темы
 settings1.changeTheme("light");  // Тема изменена на light
-console.log(settings1.theme);  // light
+// console.log(settings1.theme);  // light
 
 // Проверка: изменение темы на недопустимое значение
 settings1.changeTheme("blue");  // Недопустимая тема. Доступны только 'light' или 'dark'.
