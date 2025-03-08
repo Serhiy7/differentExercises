@@ -108,5 +108,5 @@ console.log(settings1.theme);  // light
 // Проверка: изменение темы на недопустимое значение
 settings1.changeTheme("blue");  // Недопустимая тема. Доступны только 'light' или 'dark'.
 
-// settings1.changeTheme("dark");  // 
-// console.log(settings1.theme);
+settings1.changeTheme("dark");  // 
+console.log(settings1.theme);
