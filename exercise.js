@@ -133,7 +133,7 @@ async function fetchPostsAndComments() {
     if(!commentsResponse.ok){
         throw new Error("Ошибка при загрузке комментария");
     }
-    const comments = await comments.json();
+    const comments = await commentsResponse.json();
 
     console.log(post, comments);
 } catch (error) {
