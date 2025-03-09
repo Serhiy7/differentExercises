@@ -68,45 +68,54 @@
 // myAccount.withdraw(200); 
 // myAccount.withdraw(1500); 
 // myAccount.withdraw(-100); 
+////////////////////////////////////////////////////////////////////////////////////////////
+// const Settings = (function () {
+//     let instance;
 
-const Settings = (function () {
-    let instance;
+//     function createInstance() {
+//         return {
+//             theme: "dark",  // Тема по умолчанию
+//             language: "ru",  // Язык по умолчанию
+//             changeTheme(newTheme) {
+//                 if (newTheme === "light" || newTheme === "dark") {
+//                     this.theme = newTheme;
+//                     console.log(`Тема изменена на ${this.theme}`);
+//                 } else {
+//                     console.log("Недопустимая тема. Доступны только 'light' или 'dark'.");
+//                 }
+//             }
+//         };
+//     }
 
-    function createInstance() {
-        return {
-            theme: "dark",  // Тема по умолчанию
-            language: "ru",  // Язык по умолчанию
-            changeTheme(newTheme) {
-                if (newTheme === "light" || newTheme === "dark") {
-                    this.theme = newTheme;
-                    console.log(`Тема изменена на ${this.theme}`);
-                } else {
-                    console.log("Недопустимая тема. Доступны только 'light' или 'dark'.");
-                }
-            }
-        };
-    }
+//     return {
+//         getInstance() {
+//             if (!instance) instance = createInstance();
+//             return instance;
+//         }
+//     };
+// })();
 
-    return {
-        getInstance() {
-            if (!instance) instance = createInstance();
-            return instance;
-        }
-    };
-})();
+// const settings1 = Settings.getInstance();
+// const settings2 = Settings.getInstance();
 
-const settings1 = Settings.getInstance();
-const settings2 = Settings.getInstance();
+// // Проверяем, одинаковые ли экземпляры
+// console.log(settings1 === settings2); // true (всегда один объект)
 
-// Проверяем, одинаковые ли экземпляры
-console.log(settings1 === settings2); // true (всегда один объект)
+// // Проверка: изменение темы
+// settings1.changeTheme("light");  // Тема изменена на light
+// console.log(settings1.theme);  // light
 
-// Проверка: изменение темы
-settings1.changeTheme("light");  // Тема изменена на light
-console.log(settings1.theme);  // light
+// // Проверка: изменение темы на недопустимое значение
+// settings1.changeTheme("blue");  // Недопустимая тема. Доступны только 'light' или 'dark'.
 
-// Проверка: изменение темы на недопустимое значение
-settings1.changeTheme("blue");  // Недопустимая тема. Доступны только 'light' или 'dark'.
+// settings1.changeTheme("dark");  // 
+// console.log(settings1.theme);
+/////////////////////////////////////////////////////////////////////
 
-settings1.changeTheme("dark");  // 
-console.log(settings1.theme);
+function wait(seconds) {
+    return new Promise(resolve => {
+        setTimeout(() => resolve(`Прошло ${seconds} секунд`), seconds * 1000);
+    });
+}
+
+wait(3).then(console.log);
