@@ -122,13 +122,24 @@
 /////////////////////////////////////////////////////////////////////
 
 async function fetchPostsAndComments() {
+    try{
     const postResponse = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+    if(!postResponse.ok){
+        throw new Error("Ошибка при загрузке поста");
+    }
     const post = await postResponse.json();
 
     const commentsResponse = await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`);
+    if(!commentsResponse.ok){
+        throw new Error("Ошибка при загрузке комментария");
+    }
     const comments = await comments.json();
 
     console.log(post, comments);
+} catch (error) {
+    // Обработка ошибок
+    console.error("Произошла ошибка:", error);
+}
 }
 
 fetchPostsAndComments();
