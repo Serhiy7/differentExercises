@@ -112,10 +112,23 @@
 // console.log(settings1.theme);
 /////////////////////////////////////////////////////////////////////
 
-function wait(seconds) {
-    return new Promise(resolve => {
-        setTimeout(() => resolve(`Прошло ${seconds} секунд`), seconds * 1000);
-    });
+// function wait(seconds) {
+//     return new Promise(resolve => {
+//         setTimeout(() => resolve(`Прошло ${seconds} секунд`), seconds * 1000);
+//     });
+// }
+
+// wait(3).then(console.log);
+/////////////////////////////////////////////////////////////////////
+
+async function fetchPostsAndComments() {
+    const postResponse = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+    const post = await postResponse.json();
+
+    const commentsResponse = await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`);
+    const comments = await comments.json();
+
+    console.log(post, comments);
 }
 
-wait(3).then(console.log);
+fetchPostsAndComments();
