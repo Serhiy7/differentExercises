@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заметки с API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #notes-list {
+            margin-top: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+        .note {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .note button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Заметки</h1>
+
+    <!-- Форма для добавления заметки -->
+    <input type="text" id="note-title" placeholder="Заголовок">
+    <textarea id="note-body" placeholder="Текст заметки"></textarea>
+    <button id="add-note">Добавить заметку</button>
+
+    <div id="loading-indicator" style="display: none;">Загрузка...</div>
+
+    <!-- Список заметок -->
+    <ul id="notes-list"></ul>
+
+    <script src="appi.js"></script>
+</body>
+</html>
