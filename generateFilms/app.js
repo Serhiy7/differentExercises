@@ -1,5 +1,5 @@
 // API ключ OMDB
-const apiKey = "http://www.omdbapi.com/?i=tt3896198&apikey=c22ee88"; // Замените на свой API-ключ
+const apiKey = "c22ee88"; // Замените на свой API-ключ
 
 // Получаем элементы с DOM
 const movieInput = document.getElementById("movie-input");
