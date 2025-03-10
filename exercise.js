@@ -146,10 +146,42 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 
-const findLongestWord = (sentence) => 
-    sentence.split(" ").reduce((longest, word) => 
-        word.length > longest.length ? word : longest, ""
-    );
+// const findLongestWord = (sentence) => 
+//     sentence.split(" ").reduce((longest, word) => 
+//         word.length > longest.length ? word : longest, ""
+//     );
 
 
-console.log(findLongestWord("The quick brown fox jumps over the lazy dog"));
+// console.log(findLongestWord("The quick brown fox jumps over the lazy dog"));
+//////////////////////////////////////////////////////////////////////////////////////
+
+// async function getUsers() {
+//     const res = await fetch('https://jsonplaceholder.typicode.com/users');
+//     const users = await res.json();
+//     users.forEach(user => console.log(user.name, user.email));
+//   }
+  
+//   getUsers();
+
+
+async function addNewPost(title,body) {
+    try{
+    const res = await fetch ('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({title, body})
+    });
+
+    if (!res.ok) {
+        throw new Error('Ошибка при создании поста')
+    }
+
+    const post = await res.json();
+    console.log(post);
+     
+    }catch (error) {
+        console.error('Произошла ошибка:', error);
+    }
+}
+
+addNewPost('Мой пост', 'Привет мир!')
