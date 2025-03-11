@@ -1,0 +1,27 @@
+<style>
+.selected {
+  background-color: lightblue;
+}
+</style>
+
+
+<ul id="items-list">
+  <li>Пункт 1</li>
+  <li>Пункт 2</li>
+  <li>Пункт 3</li>
+  <li>Пункт 4</li>
+  <li>Пункт 5</li>
+  <li>Пункт 6</li>
+  <li>Пункт 7</li>
+  <li>Пункт 8</li>
+  <li>Пункт 9</li>
+  <li>Пункт 10</li>
+</ul>
+
+<script>
+document.getElementById('items-list').addEventListener('click', (e) => {
+  if (e.target.tagName === 'LI') {
+    e.target.classList.toggle('selected');
+  }
+});
+</script>
