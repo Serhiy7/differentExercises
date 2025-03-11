@@ -1,121 +1,118 @@
-// Получаем элементы с DOM
+const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
 const addNoteButton = document.getElementById("add-note");
-const noteTitleInput = document.getElementById("note-title");
-const noteBodyInput = document.getElementById("note-body");
 const notesList = document.getElementById("notes-list");
 const loadingIndicator = document.getElementById("loading-indicator");
+const noteTitleInput = document.getElementById("note-title");
+const noteBodyInput = document.getElementById("note-body");
 
-// API URL
-const apiUrl = "https://jsonplaceholder.typicode.com/posts";
-
-// Функция для отображения заметок
+// Отображение заметок
 function displayNotes(notes) {
     notesList.innerHTML = "";
     notes.forEach(note => {
-        const noteItem = document.createElement("li");
-        noteItem.classList.add("note");
-
-        noteItem.innerHTML = `
-            <strong>${note.title}</strong><br>
-            ${note.body}
-            <button onclick="editNote(${note.id})">Редактировать</button>
+        const li = document.createElement("li");
+        li.classList.add("note");
+        li.innerHTML = `
+            <strong>${note.title}</strong>
+            <p>${note.body}</p>
+            <button onclick="editNote(${note.id})">Изменить</button>
             <button onclick="deleteNote(${note.id})">Удалить</button>
         `;
-
-        notesList.appendChild(noteItem);
+        notesList.appendChild(li);
     });
 }
 
-// Функция для получения всех заметок
+// Получение заметок
 async function fetchNotes() {
+    loadingIndicator.style.display = "block";
     try {
-        loadingIndicator.style.display = "block"; // Показываем индикатор загрузки
-        const res = await fetch(apiUrl);
-        const data = await res.json();
-        displayNotes(data);
+        const res = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=10");
+        const notes = await res.json();
+        displayNotes(notes);
     } catch (error) {
-        console.error("Ошибка при загрузке заметок:", error);
+        console.error("Ошибка загрузки:", error);
     } finally {
-        loadingIndicator.style.display = "none"; // Скрываем индикатор загрузки
+        loadingIndicator.style.display = "none";
     }
 }
 
-// Функция для добавления новой заметки (POST)
-async function addNewNote() {
+// Добавление заметки
+async function addNote() {
     const title = noteTitleInput.value.trim();
     const body = noteBodyInput.value.trim();
 
-    if (title && body) {
-        try {
-            loadingIndicator.style.display = "block"; // Показываем индикатор загрузки
-
-            const res = await fetch(apiUrl, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ title, body })
-            });
-
-            const newNote = await res.json();
-            console.log("Заметка добавлена:", newNote);
-
-            // После добавления заметки, перезагружаем список заметок
-            fetchNotes();
-        } catch (error) {
-            console.error("Ошибка при добавлении заметки:", error);
-        } finally {
-            loadingIndicator.style.display = "none"; // Скрываем индикатор загрузки
-        }
-    } else {
+    if (!title || !body) {
         alert("Заполните все поля!");
+        return;
+    }
+
+    loadingIndicator.style.display = "block";
+    try {
+        const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, body })
+        });
+
+        const newNote = await res.json();
+        console.log("Добавлено:", newNote);
+        fetchNotes();
+    } catch (error) {
+        console.error("Ошибка при добавлении:", error);
+    } finally {
+        loadingIndicator.style.display = "none";
     }
 }
 
-// Функция для редактирования заметки (PUT)
+// Изменение заметки
 async function editNote(id) {
     const newTitle = prompt("Введите новый заголовок:");
-    const newBody = prompt("Введите новый текст:");
+    const newBody = prompt("Введите новый текст заметки:");
 
     if (newTitle && newBody) {
+        loadingIndicator.style.display = "block";
         try {
-            const res = await fetch(`${apiUrl}/${id}`, {
+            const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ title: newTitle, body: newBody })
             });
 
-            const updatedNote = await res.json();
-            console.log("Заметка обновлена:", updatedNote);
+            if (!res.ok) throw new Error("Ошибка обновления!");
 
-            // После обновления, перезагружаем список заметок
+            const updatedNote = await res.json();
+            console.log("Обновлено:", updatedNote);
             fetchNotes();
         } catch (error) {
-            console.error("Ошибка при редактировании заметки:", error);
+            console.error("Ошибка при обновлении:", error);
+        } finally {
+            loadingIndicator.style.display = "none";
         }
     }
 }
 
-// Функция для удаления заметки (DELETE)
+// Удаление заметки
 async function deleteNote(id) {
-    if (confirm("Вы уверены, что хотите удалить эту заметку?")) {
-        try {
-            const res = await fetch(`${apiUrl}/${id}`, {
-                method: "DELETE"
-            });
+    if (!confirm("Удалить заметку?")) return;
 
-            if (res.status === 200) {
-                console.log("Заметка удалена");
+    loadingIndicator.style.display = "block";
+    try {
+        const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, { method: "DELETE" });
 
-                // После удаления, перезагружаем список заметок
-                fetchNotes();
-            }
-        } catch (error) {
-            console.error("Ошибка при удалении заметки:", error);
+        if (res.ok) {
+            console.log("Заметка удалена");
+            fetchNotes();
+        } else {
+            throw new Error("Ошибка при удалении");
         }
+    } catch (error) {
+        console.error("Ошибка удаления:", error);
+    } finally {
+        loadingIndicator.style.display = "none";
     }
 }
 
-// Обработчик события для кнопки "Добавить заметку"
-addNoteButton.addEventListener("click", addNewNote);
+// Кнопка добавления заметки
+addNoteButton.addEventListener("click", addNote);
 
-// Загружаем заметки при загрузке страницы
+// Загрузка заметок при старте страницы
 fetchNotes();
