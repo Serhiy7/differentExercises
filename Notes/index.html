@@ -1,43 +1,69 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Заметки с API</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        #notes-list {
-            margin-top: 20px;
-            list-style-type: none;
-            padding: 0;
-        }
-        .note {
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-        .note button {
-            margin-left: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Блокнот задач с облачной синхронизацией</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 30px;
+    }
+    #task-input {
+      padding: 8px;
+      font-size: 16px;
+      width: 250px;
+    }
+    #add-task {
+      padding: 8px 16px;
+      font-size: 16px;
+    }
+    #task-list {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    #task-list li {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    #task-list li.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delete-btn, .complete-btn, .edit-btn {
+      margin-left: 10px;
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 14px;
+    }
+    #loading {
+      display: none;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 
-    <h1>Заметки</h1>
+  <h1>Блокнот задач</h1>
+  <input type="text" id="task-input" placeholder="Новая задача">
+  <button id="add-task">Добавить</button>
+  
+  <div id="loading">Загрузка...</div>
+  
+  <ul id="task-list"></ul>
 
-    <!-- Форма для добавления заметки -->
-    <input type="text" id="note-title" placeholder="Заголовок">
-    <textarea id="note-body" placeholder="Текст заметки"></textarea>
-    <button id="add-note">Добавить заметку</button>
-
-    <div id="loading-indicator" style="display: none;">Загрузка...</div>
-
-    <!-- Список заметок -->
-    <ul id="notes-list"></ul>
-
-    <script src="appi.js"></script>
+  <script src="appi.js"></script>
 </body>
 </html>
