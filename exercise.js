@@ -13,7 +13,6 @@
 //   this.speed += amount;
 //   console.log(`Новая скорость: ${this.speed} км/ч`);
 
-
 // // Добавляем проверку, если скорость больше 400 км/ч
 // if (this.speed > 400) {
 //   console.warn("Предупреждение: Скорость выше 400 км/ч! Это слишком быстро!");
@@ -25,7 +24,6 @@
 // const myCar = new Car("BMW", 2020, 250);
 // console.log(myCar.getCarInfo());
 // myCar.increaseSpeed(20);
-
 
 // class BankAccount {
 //   constructor(owner, balance) {
@@ -64,10 +62,10 @@
 
 // const myAccount = new SavingsAccount("Иван", 1000, 5);
 // myAccount.deposit(500);
-// myAccount.addInterest(); 
-// myAccount.withdraw(200); 
-// myAccount.withdraw(1500); 
-// myAccount.withdraw(-100); 
+// myAccount.addInterest();
+// myAccount.withdraw(200);
+// myAccount.withdraw(1500);
+// myAccount.withdraw(-100);
 ////////////////////////////////////////////////////////////////////////////////////////////
 // const Settings = (function () {
 //     let instance;
@@ -108,7 +106,7 @@
 // // Проверка: изменение темы на недопустимое значение
 // settings1.changeTheme("blue");  // Недопустимая тема. Доступны только 'light' или 'dark'.
 
-// settings1.changeTheme("dark");  // 
+// settings1.changeTheme("dark");  //
 // console.log(settings1.theme);
 /////////////////////////////////////////////////////////////////////
 
@@ -145,12 +143,10 @@
 // fetchPostsAndComments();
 ///////////////////////////////////////////////////////////////////////////////////
 
-
-// const findLongestWord = (sentence) => 
-//     sentence.split(" ").reduce((longest, word) => 
+// const findLongestWord = (sentence) =>
+//     sentence.split(" ").reduce((longest, word) =>
 //         word.length > longest.length ? word : longest, ""
 //     );
-
 
 // console.log(findLongestWord("The quick brown fox jumps over the lazy dog"));
 //////////////////////////////////////////////////////////////////////////////////////
@@ -160,28 +156,26 @@
 //     const users = await res.json();
 //     users.forEach(user => console.log(user.name, user.email));
 //   }
-  
+
 //   getUsers();
 
-
-async function addNewPost(title,body) {
-    try{
-    const res = await fetch ('https://jsonplaceholder.typicode.com/posts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({title, body})
+async function addNewPost(title, body) {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, body }),
     });
 
     if (!res.ok) {
-        throw new Error('Ошибка при создании поста')
+      throw new Error("Ошибка при создании поста");
     }
 
     const post = await res.json();
     console.log(post);
-     
-    }catch (error) {
-        console.error('Произошла ошибка:', error);
-    }
+  } catch (error) {
+    console.error("Произошла ошибка:", error);
+  }
 }
 
-addNewPost('Мой пост', 'Привет мир!')
+// addNewPost('Мой пост', 'Привет мир!')
