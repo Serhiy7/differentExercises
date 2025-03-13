@@ -159,23 +159,37 @@
 
 //   getUsers();
 
-async function addNewPost(title, body) {
-  try {
-    const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, body }),
-    });
+// async function addNewPost(title, body) {
+//   try {
+//     const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ title, body }),
+//     });
 
-    if (!res.ok) {
-      throw new Error("Ошибка при создании поста");
+//     if (!res.ok) {
+//       throw new Error("Ошибка при создании поста");
+//     }
+
+//     const post = await res.json();
+//     console.log(post);
+//   } catch (error) {
+//     console.error("Произошла ошибка:", error);
+//   }
+// }
+
+// addNewPost("Мой пост", "Привет мир!");
+
+function countVowels(str) {
+  const vowels = "aeiou";
+  let count = 0;
+
+  for (let char of str.toLowerCase()) {
+    if (vowels.includes(char)) {
+      count++;
     }
-
-    const post = await res.json();
-    console.log(post);
-  } catch (error) {
-    console.error("Произошла ошибка:", error);
   }
+  return count;
 }
 
-addNewPost("Мой пост", "Привет мир!");
+console.log(countVowels("hello World"));
