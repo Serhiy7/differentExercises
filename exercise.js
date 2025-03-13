@@ -193,3 +193,9 @@ function countVowels(str) {
 }
 
 console.log(countVowels("hello World"));
+
+function countVowels(str) {
+  return (str.match(/[aeiou]/gi) || []).length;
+}
+
+console.log(countVowels("hello World")); // Output: 3
