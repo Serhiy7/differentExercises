@@ -178,4 +178,4 @@ async function addNewPost(title, body) {
   }
 }
 
-// addNewPost('Мой пост', 'Привет мир!')
+addNewPost("Мой пост", "Привет мир!");
