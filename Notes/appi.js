@@ -113,7 +113,7 @@ async function deleteTask(taskId) {
       method: "DELETE",
     });
     if (response.ok) {
-      tasks = tasks.filter((task) => task.id !== taskId);
+      tasks = tasks.filter((task) => task.id !== taskId); //Таким образом, мы фильтруем задачу с определённым ID и удаляем её из массива.
       saveTasks();
       renderTasks(tasks);
     } else {
