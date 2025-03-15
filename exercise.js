@@ -180,22 +180,31 @@
 
 // addNewPost("Мой пост", "Привет мир!");
 
-function countVowels(str) {
-  const vowels = "aeiou";
-  let count = 0;
+// function countVowels(str) {
+//   const vowels = "aeiou";
+//   let count = 0;
 
-  for (let char of str.toLowerCase()) {
-    if (vowels.includes(char)) {
-      count++;
-    }
-  }
-  return count;
+//   for (let char of str.toLowerCase()) {
+//     if (vowels.includes(char)) {
+//       count++;
+//     }
+//   }
+//   return count;
+// }
+
+// console.log(countVowels("hello World"));
+
+// function countVowels(str) {
+//   return (str.match(/[aeiou]/gi) || []).length;
+// }
+
+// console.log(countVowels("hello World")); // Output: 3
+
+function findLargestNumber(numbers) {
+  return numbers.reduce(
+    (max, current) => (current > max ? current : max),
+    numbers[0]
+  );
 }
 
-console.log(countVowels("hello World"));
-
-function countVowels(str) {
-  return (str.match(/[aeiou]/gi) || []).length;
-}
-
-console.log(countVowels("hello World")); // Output: 3
+console.log(findLargestNumber([10, 5, 30, 15])); // Output should be 30
