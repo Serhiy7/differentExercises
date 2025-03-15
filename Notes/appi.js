@@ -1,5 +1,5 @@
 // Ключ API JSONPlaceholder (он публичный, поэтому здесь не нужен секретный ключ)
-const API_URL = 'https://jsonplaceholder.typicode.com/todos';
+const API_URL = "https://jsonplaceholder.typicode.com/todos";
 
 // Получаем элементы из DOM
 const taskInput = document.getElementById("task-input");
@@ -13,12 +13,14 @@ let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 // Функция для рендеринга задач
 function renderTasks(tasksToRender) {
   taskList.innerHTML = "";
-  tasksToRender.forEach(task => {
+  tasksToRender.forEach((task) => {
     const li = document.createElement("li");
     li.dataset.id = task.id;
     li.innerHTML = `
       <span>
-        <input type="checkbox" class="complete-btn" ${task.completed ? 'checked' : ''}>
+        <input type="checkbox" class="complete-btn" ${
+          task.completed ? "checked" : ""
+        }>
         <strong>${task.title}</strong>
       </span>
       <span>
@@ -37,20 +39,25 @@ function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-// Загрузка задач с сервера (GET)
+// Загрузка задач с учётом localStorage
 async function loadTasks() {
-  loadingIndicator.style.display = "block";
-  try {
-    const response = await fetch(`${API_URL}?_limit=5`); // Ограничим выборку, чтобы не было слишком много задач
-    const data = await response.json();
-    // Сохраняем полученные задачи в локальное хранилище и в глобальный массив
-    tasks = data;
-    saveTasks();
+  const localTasks = JSON.parse(localStorage.getItem("tasks"));
+
+  if (localTasks && localTasks.length > 0) {
+    tasks = localTasks;
     renderTasks(tasks);
-  } catch (error) {
-    console.error("Ошибка загрузки задач:", error);
-  } finally {
-    loadingIndicator.style.display = "none";
+  } else {
+    loadingIndicator.style.display = "block";
+    try {
+      const response = await fetch(`${API_URL}?_limit=5`);
+      tasks = await response.json();
+      saveTasks();
+      renderTasks(tasks);
+    } catch (error) {
+      console.error("Ошибка загрузки задач:", error);
+    } finally {
+      loadingIndicator.style.display = "none";
+    }
   }
 }
 
@@ -59,9 +66,9 @@ async function addTask(title) {
   loadingIndicator.style.display = "block";
   try {
     const response = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, completed: false })
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, completed: false }),
     });
     const newTask = await response.json();
     // Поскольку JSONPlaceholder не сохраняет реальные ID, можно сгенерировать уникальный ID локально:
@@ -81,13 +88,13 @@ async function updateTask(taskId, newTitle, newCompleted) {
   loadingIndicator.style.display = "block";
   try {
     const response = await fetch(`${API_URL}/${taskId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: newTitle, completed: newCompleted })
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: newTitle, completed: newCompleted }),
     });
     const updatedTask = await response.json();
     // Обновляем локальную задачу
-    tasks = tasks.map(task => task.id === taskId ? updatedTask : task);
+    tasks = tasks.map((task) => (task.id === taskId ? updatedTask : task));
     saveTasks();
     renderTasks(tasks);
   } catch (error) {
@@ -103,10 +110,10 @@ async function deleteTask(taskId) {
   loadingIndicator.style.display = "block";
   try {
     const response = await fetch(`${API_URL}/${taskId}`, {
-      method: 'DELETE'
+      method: "DELETE",
     });
     if (response.ok) {
-      tasks = tasks.filter(task => task.id !== taskId);
+      tasks = tasks.filter((task) => task.id !== taskId);
       saveTasks();
       renderTasks(tasks);
     } else {
@@ -130,6 +137,10 @@ addTaskButton.addEventListener("click", () => {
   }
 });
 
+taskInput.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") addTaskButton.click();
+});
+
 // Делегирование событий для управления задачами
 taskList.addEventListener("click", (e) => {
   const li = e.target.closest("li");
@@ -143,7 +154,10 @@ taskList.addEventListener("click", (e) => {
 
   // Обработка нажатия на кнопку "Редактировать"
   if (e.target.classList.contains("edit-btn")) {
-    const newTitle = prompt("Введите новое название задачи:", li.querySelector("strong").textContent);
+    const newTitle = prompt(
+      "Введите новое название задачи:",
+      li.querySelector("strong").textContent
+    );
     if (newTitle) {
       // Определим новое состояние checkbox
       const checkbox = li.querySelector(".complete-btn");
@@ -156,7 +170,7 @@ taskList.addEventListener("click", (e) => {
   if (e.target.classList.contains("complete-btn")) {
     const newCompleted = e.target.checked;
     // Находим задачу по ID
-    const task = tasks.find(t => t.id === taskId);
+    const task = tasks.find((t) => t.id === taskId);
     if (task) {
       updateTask(taskId, task.title, newCompleted);
     }
