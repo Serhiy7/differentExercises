@@ -208,3 +208,12 @@ function findLargestNumber(numbers) {
 }
 
 console.log(findLargestNumber([10, 5, 30, 15])); // Output should be 30
+
+function findLargestNumber(numbers) {
+  return numbers.reduce(
+    (max, current) => (current > max ? current : max),
+    numbers[0]
+  );
+}
+
+console.log(findLargestNumber([10, 5, 30, 15])); // Output should be 30
