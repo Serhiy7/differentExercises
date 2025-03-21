@@ -200,19 +200,19 @@
 
 // console.log(countVowels("hello World")); // Output: 3
 
-function findLargestNumber(numbers) {
-  return numbers.reduce(
-    (max, current) => (current > max ? current : max),
-    numbers[0]
-  );
+// function findLargestNumber(numbers) {
+//   return numbers.reduce(
+//     (max, current) => (current > max ? current : max),
+//     numbers[0]
+//   );
+// }
+
+const myArray = [10, 20, 30, 40];
+
+function calculateAverage(numbers) {
+  if (numbers.length === 0) return 0;
+  const sum = numbers.reduce((total, num) => total + num, 0);
+  return sum / numbers.length;
 }
 
-console.log(findLargestNumber([10, 5, 30, 15])); // Output should be 30
-function findLargestNumber(numbers) {
-  return numbers.reduce(
-    (max, current) => (current > max ? current : max),
-    numbers[0]
-  );
-}
-
-console.log(findLargestNumber([10, 5, 30, 15])); // Output should be 30
+console.log(calculateAverage(myArray));
