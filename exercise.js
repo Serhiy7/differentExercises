@@ -216,13 +216,3 @@ function calculateAverage(numbers) {
 }
 
 console.log(calculateAverage(myArray));
-
-// const myArray = [10, 20, 30, 40];
-
-// function calculateAverage(numbers) {
-//   if (numbers.length === 0) return 0;
-//   const sum = numbers.reduce((total, num) => total + num, 0);
-//   return sum / numbers.length;
-// }
-
-// console.log(calculateAverage(myArray));
