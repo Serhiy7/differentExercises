@@ -65,3 +65,4 @@ window.addEventListener("load", () => {
     getWeather(lastCity);
   }
 });
+// the best
