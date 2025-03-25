@@ -245,25 +245,25 @@ function isPalindrome(str) {
 // Testing the function:
 console.log(isPalindrome("level")); // Output: true
 console.log(isPalindrome("frontend")); // Output: false
-function isPalindrome(str) {
-  // Convert the string to lowercase to ignore case differences
-  const normalized = str.toLowerCase();
+// function isPalindrome(str) {
+//   // Convert the string to lowercase to ignore case differences
+//   const normalized = str.toLowerCase();
 
-  // Initialize two pointers
-  let left = 0;
-  let right = normalized.length - 1;
+//   // Initialize two pointers
+//   let left = 0;
+//   let right = normalized.length - 1;
 
-  // Loop until the pointers meet in the middle
-  while (left < right) {
-    if (normalized[left] !== normalized[right]) {
-      return false;
-    }
-    left++;
-    right--;
-  }
-  return true;
-}
+//   // Loop until the pointers meet in the middle
+//   while (left < right) {
+//     if (normalized[left] !== normalized[right]) {
+//       return false;
+//     }
+//     left++;
+//     right--;
+//   }
+//   return true;
+// }
 
-// Testing the function:
-console.log(isPalindrome("level")); // Output: true
-console.log(isPalindrome("frontend")); // Output: false
+// // Testing the function:
+// console.log(isPalindrome("level")); // Output: true
+// console.log(isPalindrome("frontend")); // Output: false
