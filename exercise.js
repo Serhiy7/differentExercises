@@ -217,8 +217,53 @@
 
 // console.log(calculateAverage(myArray));
 
-const removeDuplicates = function (array) {
-  return (newArray = array.filter((el, index) => array.indexOf(el) === index));
-};
+// const removeDuplicates = function (array) {
+//   return (newArray = array.filter((el, index) => array.indexOf(el) === index));
+// };
 
-console.log(removeDuplicates([1, 2, 2, 3, 4, 4, 5]));
+// console.log(removeDuplicates([1, 2, 2, 3, 4, 4, 5]));
+
+function isPalindrome(str) {
+  // Convert the string to lowercase to ignore case differences
+  const normalized = str.toLowerCase();
+
+  // Initialize two pointers
+  let left = 0;
+  let right = normalized.length - 1;
+
+  // Loop until the pointers meet in the middle
+  while (left < right) {
+    if (normalized[left] !== normalized[right]) {
+      return false;
+    }
+    left++;
+    right--;
+  }
+  return true;
+}
+
+// Testing the function:
+console.log(isPalindrome("level")); // Output: true
+console.log(isPalindrome("frontend")); // Output: false
+function isPalindrome(str) {
+  // Convert the string to lowercase to ignore case differences
+  const normalized = str.toLowerCase();
+
+  // Initialize two pointers
+  let left = 0;
+  let right = normalized.length - 1;
+
+  // Loop until the pointers meet in the middle
+  while (left < right) {
+    if (normalized[left] !== normalized[right]) {
+      return false;
+    }
+    left++;
+    right--;
+  }
+  return true;
+}
+
+// Testing the function:
+console.log(isPalindrome("level")); // Output: true
+console.log(isPalindrome("frontend")); // Output: false
