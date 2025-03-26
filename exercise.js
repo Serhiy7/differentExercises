@@ -246,19 +246,67 @@
 // console.log(isPalindrome("level")); // Output: true
 // console.log(isPalindrome("frontend")); // Output: false
 
-function findLongestWord(str) {
-  // Split the sentence into an array of words by space
-  const words = str.split(" ");
-  // Use reduce to find the longest word:
-  // The reducer function compares the current longest word with the current word.
-  // If the current word is longer, it becomes the new longest word.
-  const longest = words.reduce((longestSoFar, currentWord) => {
-    return currentWord.length > longestSoFar.length
-      ? currentWord
-      : longestSoFar;
-  }, "");
+// function findLongestWord(str) {
+//   // Split the sentence into an array of words by space
+//   const words = str.split(" ");
+//   // Use reduce to find the longest word:
+//   // The reducer function compares the current longest word with the current word.
+//   // If the current word is longer, it becomes the new longest word.
+//   const longest = words.reduce((longestSoFar, currentWord) => {
+//     return currentWord.length > longestSoFar.length
+//       ? currentWord
+//       : longestSoFar;
+//   }, "");
 
-  return longest;
+//   return longest;
+// }
+// // Testing the function:
+// console.log(findLongestWord("I love JavaScript and frontend")); // Output: "JavaScript"
+
+import { useState, useEffect } from "react";
+
+function Weather({ city }) {
+  const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const apiKey = "ТВОЙ_API_KEY";
+    const fetchWeather = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
+        );
+        if (!res.ok) {
+          throw new Error("Ошибка при загрузке данных");
+        }
+        const data = await res.json();
+        setWeather(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWeather();
+  }, [city]); // Выполняется повторно при изменении city
+
+  if (loading) return <div>Загрузка...</div>;
+  if (error) return <div>Ошибка: {error}</div>;
+
+  return (
+    <div>
+      <h2>{weather.name}</h2>
+      <p>🌡️ Температура: {weather.main.temp} °C</p>
+      <p>📖 Погода: {weather.weather[0].description}</p>
+      <img
+        src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+        alt="weather icon"
+      />
+    </div>
+  );
 }
-// Testing the function:
-console.log(findLongestWord("I love JavaScript and frontend")); // Output: "JavaScript"
+
+export default Weather;
