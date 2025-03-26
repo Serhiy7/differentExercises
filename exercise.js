@@ -223,25 +223,42 @@
 
 // console.log(removeDuplicates([1, 2, 2, 3, 4, 4, 5]));
 
-function isPalindrome(str) {
-  // Convert the string to lowercase to ignore case differences
-  const normalized = str.toLowerCase();
+// function isPalindrome(str) {
+//   // Convert the string to lowercase to ignore case differences
+//   const normalized = str.toLowerCase();
 
-  // Initialize two pointers
-  let left = 0;
-  let right = normalized.length - 1;
+//   // Initialize two pointers
+//   let left = 0;
+//   let right = normalized.length - 1;
 
-  // Loop until the pointers meet in the middle
-  while (left < right) {
-    if (normalized[left] !== normalized[right]) {
-      return false;
-    }
-    left++;
-    right--;
-  }
-  return true;
+//   // Loop until the pointers meet in the middle
+//   while (left < right) {
+//     if (normalized[left] !== normalized[right]) {
+//       return false;
+//     }
+//     left++;
+//     right--;
+//   }
+//   return true;
+// }
+
+// // Testing the function:
+// console.log(isPalindrome("level")); // Output: true
+// console.log(isPalindrome("frontend")); // Output: false
+
+function findLongestWord(str) {
+  // Split the sentence into an array of words by space
+  const words = str.split(" ");
+  // Use reduce to find the longest word:
+  // The reducer function compares the current longest word with the current word.
+  // If the current word is longer, it becomes the new longest word.
+  const longest = words.reduce((longestSoFar, currentWord) => {
+    return currentWord.length > longestSoFar.length
+      ? currentWord
+      : longestSoFar;
+  }, "");
+
+  return longest;
 }
-
 // Testing the function:
-console.log(isPalindrome("level")); // Output: true
-console.log(isPalindrome("frontend")); // Output: false
+console.log(findLongestWord("I love JavaScript and frontend")); // Output: "JavaScript"
