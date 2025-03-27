@@ -263,10 +263,10 @@
 // // Testing the function:
 // console.log(findLongestWord("I love JavaScript and frontend")); // Output: "JavaScript"
 
-const sumPositiveNumbers = function (array) {
-  const positiveNum = array.filter((el) => el > 0);
-  const sum = positiveNum.reduce((sum, el) => el + sum, 0);
-  return sum;
-};
+// const sumPositiveNumbers = function (array) {
+//   const positiveNum = array.filter((el) => el > 0);
+//   const sum = positiveNum.reduce((sum, el) => el + sum, 0);
+//   return sum;
+// };
 
-console.log(sumPositiveNumbers([1, -2, 3, 4, -5]));
+// console.log(sumPositiveNumbers([1, -2, 3, 4, -5]));
