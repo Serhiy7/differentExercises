@@ -271,4 +271,4 @@ const sumPositiveNumbers = function (array) {
 
 console.log(sumPositiveNumbers([1, -2, 3, 4, -5]));
 
-// long days
+console.log("holidays");
