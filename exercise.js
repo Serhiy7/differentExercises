@@ -273,15 +273,15 @@
 
 // console.log("holidays");
 
-function capitalizeWords(str) {
-  let myArray = str.split(" ");
-  myArray = myArray.map((word) => {
-    if (word.length > 0) {
-      return word[0].toUpperCase() + word.slice(1);
-    }
-    return word;
-  });
-  return myArray.join(" ");
-}
+// function capitalizeWords(str) {
+//   let myArray = str.split(" ");
+//   myArray = myArray.map((word) => {
+//     if (word.length > 0) {
+//       return word[0].toUpperCase() + word.slice(1);
+//     }
+//     return word;
+//   });
+//   return myArray.join(" ");
+// }
 
-console.log(capitalizeWords("frontend development is fun"));
+// console.log(capitalizeWords("frontend development is fun"));
