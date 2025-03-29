@@ -263,12 +263,25 @@
 // // Testing the function:
 // console.log(findLongestWord("I love JavaScript and frontend")); // Output: "JavaScript"
 
-const sumPositiveNumbers = function (array) {
-  const positiveNum = array.filter((el) => el > 0);
-  const sum = positiveNum.reduce((sum, el) => el + sum, 0);
-  return sum;
-};
+// const sumPositiveNumbers = function (array) {
+//   const positiveNum = array.filter((el) => el > 0);
+//   const sum = positiveNum.reduce((sum, el) => el + sum, 0);
+//   return sum;
+// };
 
-console.log(sumPositiveNumbers([1, -2, 3, 4, -5]));
+// console.log(sumPositiveNumbers([1, -2, 3, 4, -5]));
 
-console.log("holidays");
+// console.log("holidays");
+
+function capitalizeWords(str) {
+  let myArray = str.split(" ");
+  myArray = myArray.map((word) => {
+    if (word.length > 0) {
+      return word[0].toUpperCase() + word.slice(1);
+    }
+    return word;
+  });
+  return myArray.join(" ");
+}
+
+console.log(capitalizeWords("frontend development is fun"));
