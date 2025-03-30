@@ -286,9 +286,9 @@
 
 // console.log(capitalizeWords("frontend development is fun"));
 
-function countWords(str) {
-  let quantity = str.split(" ");
-  return quantity.length;
-}
+// function countWords(str) {
+//   let quantity = str.split(" ");
+//   return quantity.length;
+// }
 
-console.log(countWords("Frontend development is exciting"));
+// console.log(countWords("Frontend development is exciting"));
