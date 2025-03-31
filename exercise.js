@@ -292,3 +292,14 @@
 // }
 
 // console.log(countWords("Frontend development is exciting"));
+
+function repeatString(string, num) {
+  let resoult = "";
+  while (num > 0) {
+    resoult += string;
+    num--;
+  }
+  return resoult;
+}
+
+console.log(repeatString("Frontend", 5));
