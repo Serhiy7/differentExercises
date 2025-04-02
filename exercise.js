@@ -304,13 +304,13 @@
 
 // console.log(repeatString("Frontend", 5));
 
-function calculateFactorial(num) {
-  let result = 1;
-  while (num > 0) {
-    result *= num;
-    num--;
-  }
-  return result;
-}
+// function calculateFactorial(num) {
+//   let result = 1;
+//   while (num > 0) {
+//     result *= num;
+//     num--;
+//   }
+//   return result;
+// }
 
-console.log(calculateFactorial(5));
+// console.log(calculateFactorial(5));
