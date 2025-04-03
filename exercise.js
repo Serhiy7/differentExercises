@@ -304,13 +304,28 @@
 
 // console.log(repeatString("Frontend", 5));
 
-function calculateFactorial(num) {
-  let result = 1;
-  while (num > 0) {
-    result *= num;
-    num--;
+// function calculateFactorial(num) {
+//   let result = 1;
+//   while (num > 0) {
+//     result *= num;
+//     num--;
+//   }
+//   return result;
+// }
+
+// console.log(calculateFactorial(5));
+function flattenArray(array) {
+  let result = [];
+  for (let element of array) {
+    if (Array.isArray(element)) {
+      result = result.concat(flattenArray(element));
+    } else {
+      result.push(element);
+    }
   }
   return result;
 }
 
-console.log(calculateFactorial(5));
+console.log(flattenArray([1, [2, [3, 4], 5], 6]));
+
+flattenArray([1, [2, [3, 4], 5], 6]);
