@@ -331,7 +331,8 @@
 // flattenArray([1, [2, [3, 4], 5], 6]);
 
 function removeFalsyValues(arr) {
-  return arr.filter(Boolean);
+  // return arr.filter(Boolean);
+  return arr.filter((el) => el);
 }
 
 console.log(removeFalsyValues([0, 1, false, 2, "", 3, null, undefined, NaN]));
