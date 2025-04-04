@@ -314,18 +314,24 @@
 // }
 
 // console.log(calculateFactorial(5));
-function flattenArray(array) {
-  let result = [];
-  for (let element of array) {
-    if (Array.isArray(element)) {
-      result = result.concat(flattenArray(element));
-    } else {
-      result.push(element);
-    }
-  }
-  return result;
+// function flattenArray(array) {
+//   let result = [];
+//   for (let element of array) {
+//     if (Array.isArray(element)) {
+//       result = result.concat(flattenArray(element));
+//     } else {
+//       result.push(element);
+//     }
+//   }
+//   return result;
+// }
+
+// console.log(flattenArray([1, [2, [3, 4], 5], 6]));
+
+// flattenArray([1, [2, [3, 4], 5], 6]);
+
+function removeFalsyValues(arr) {
+  return arr.filter(Boolean);
 }
 
-console.log(flattenArray([1, [2, [3, 4], 5], 6]));
-
-flattenArray([1, [2, [3, 4], 5], 6]);
+console.log(removeFalsyValues([0, 1, false, 2, "", 3, null, undefined, NaN]));
