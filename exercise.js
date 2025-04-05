@@ -345,8 +345,8 @@
 // console.log(mergeArraysUnique([1, 2, 3], [3, 4, 5]));
 // Expected output: [1, 2, 3, 4, 5]
 
-function mergeArraysUnique(arr1, arr2) {
-  return [...new Set([...arr1, ...arr2])];
-}
+// function mergeArraysUnique(arr1, arr2) {
+//   return [...new Set([...arr1, ...arr2])];
+// }
 
-console.log(mergeArraysUnique([1, 2, 3], [3, 4, 5])); // [1, 2, 3, 4, 5]
+// console.log(mergeArraysUnique([1, 2, 3], [3, 4, 5])); // [1, 2, 3, 4, 5]
