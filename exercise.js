@@ -330,9 +330,17 @@
 
 // flattenArray([1, [2, [3, 4], 5], 6]);
 
-function removeFalsyValues(arr) {
-  // return arr.filter(Boolean);
-  return arr.filter((el) => el);
+// function removeFalsyValues(arr) {
+//   // return arr.filter(Boolean);
+//   return arr.filter((el) => el);
+// }
+
+// console.log(removeFalsyValues([0, 1, false, 2, "", 3, null, undefined, NaN]));
+
+function mergeArraysUnique(arr1, arr2) {
+  let uniqueArray = arr1.concat(arr2);
+  return uniqueArray.filter((el, index) => uniqueArray.indexOf(el) === index);
 }
 
-console.log(removeFalsyValues([0, 1, false, 2, "", 3, null, undefined, NaN]));
+console.log(mergeArraysUnique([1, 2, 3], [3, 4, 5]));
+// Expected output: [1, 2, 3, 4, 5]
