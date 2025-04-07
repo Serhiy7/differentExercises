@@ -359,3 +359,8 @@ function toggleClass(element, className) {
   }
   return element;
 }
+
+function toggleClass(element, className) {
+  element.classList.toggle(className);
+  return element;
+}
