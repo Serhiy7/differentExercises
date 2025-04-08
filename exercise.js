@@ -351,16 +351,25 @@
 
 // console.log(mergeArraysUnique([1, 2, 3], [3, 4, 5])); // [1, 2, 3, 4, 5]
 
-function toggleClass(element, className) {
-  if (element.classList.contains(className)) {
-    element.classList.remove(className);
-  } else {
-    element.classList.add(className);
-  }
-  return element;
+// function toggleClass(element, className) {
+//   if (element.classList.contains(className)) {
+//     element.classList.remove(className);
+//   } else {
+//     element.classList.add(className);
+//   }
+//   return element;
+// }
+
+// function toggleClass(element, className) {
+//   element.classList.toggle(className);
+//   return element;
+// }
+
+const person = { firstName: "John", lastName: "Doe" };
+
+function getFullName({ firstName, lastName }) {
+  helloString = `Hello, ${firstName} ${lastName}!`;
+  console.log(helloString);
 }
 
-function toggleClass(element, className) {
-  element.classList.toggle(className);
-  return element;
-}
+getFullName(person);
