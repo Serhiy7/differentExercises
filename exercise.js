@@ -365,11 +365,24 @@
 //   return element;
 // }
 
-const person = { firstName: "John", lastName: "Doe" };
+// const person = { firstName: "John", lastName: "Doe" };
 
-function getFullName({ firstName, lastName }) {
-  helloString = `Hello, ${firstName} ${lastName}!`;
-  console.log(helloString);
+// function getFullName({ firstName, lastName }) {
+//   helloString = `Hello, ${firstName} ${lastName}!`;
+//   console.log(helloString);
+// }
+
+// getFullName(person);
+
+function delay(ms) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(`Delay of ${ms} milliseconds is complete!`);
+    }, ms);
+  });
 }
 
-getFullName(person);
+// Example usage:
+delay(2000).then((message) => {
+  console.log(message);
+});
