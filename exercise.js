@@ -372,19 +372,19 @@
 //   console.log(helloString);
 // }
 
-// getFullName(person);
+getFullName(person);
 
-// async function fetchData() {
-//   try {
-//     // Wait for 1 second by creating a new Promise that resolves after 1000ms
-//     await new Promise((resolve) => setTimeout(resolve, 1000));
-//     // After the delay, return the message
-//     return "Data fetched successfully!";
-//   } catch (error) {
-//     // If any error occurs during the process, return an error message
-//     return "An error occurred.";
-//   }
-// }
+async function fetchData() {
+  try {
+    // Wait for 1 second by creating a new Promise that resolves after 1000ms
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // After the delay, return the message
+    return "Data fetched successfully!";
+  } catch (error) {
+    // If any error occurs during the process, return an error message
+    return "An error occurred.";
+  }
+}
 
-// // Example usage:
-// fetchData().then((message) => console.log(message));
+// Example usage:
+fetchData().then((message) => console.log(message));
