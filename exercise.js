@@ -387,4 +387,4 @@ async function fetchData() {
 }
 
 // Example usage:
-fetchData().then((message) => console.log(message));
+// fetchData().then((message) => console.log(message));
