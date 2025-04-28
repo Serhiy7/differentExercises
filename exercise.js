@@ -389,13 +389,31 @@
 // Example usage:
 // fetchData().then((message) => console.log(message));
 
-function first() {
-  let a = 0;
+// function first() {
+//   let a = 0;
 
-  return function second() {
-    a++;
-    console.log(a);
-  };
+//   return function second() {
+//     a++;
+//     console.log(a);
+//   };
+// }
+
+// first();
+
+async function getUserEmails() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    if (!response) {
+      throw new Error(
+        `Network response was not ok (status ${response.status})`
+      );
+    }
+    const users = await response.json();
+    const emails = users.map((user) => user.email);
+    return emails;
+  } catch (error) {
+    console.error("Failed to fetch user emails:", error);
+    return [];
+  }
 }
-
-first();
+getUserEmails().then((emails) => console.log("User emails:", emails));
