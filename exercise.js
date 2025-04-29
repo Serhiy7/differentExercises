@@ -400,20 +400,45 @@
 
 // first();
 
-async function getUserEmails() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-    if (!response) {
-      throw new Error(
-        `Network response was not ok (status ${response.status})`
-      );
+// async function getUserEmails() {
+//   try {
+//     const response = await fetch("https://jsonplaceholder.typicode.com/users");
+//     if (!response) {
+//       throw new Error(
+//         `Network response was not ok (status ${response.status})`
+//       );
+//     }
+//     const users = await response.json();
+//     const emails = users.map((user) => user.email);
+//     return emails;
+//   } catch (error) {
+//     console.error("Failed to fetch user emails:", error);
+//     return [];
+//   }
+// }
+
+function savePreferences(preferences) {
+  const jsonString = JSON.stringify(preferences);
+  localStorage.setItem("prefs", jsonString);
+}
+
+function loadPreferences() {
+  const jsonString = localStorage.getItem("prefs");
+
+  if (jsonString !== null) {
+    try {
+      return JSON.parse(jsonString);
+    } catch (e) {
+      console.warn("Could not parse prefs:", e);
+      return {};
     }
-    const users = await response.json();
-    const emails = users.map((user) => user.email);
-    return emails;
-  } catch (error) {
-    console.error("Failed to fetch user emails:", error);
-    return [];
+  } else {
+    return {};
   }
 }
-getUserEmails().then((emails) => console.log("User emails:", emails));
+
+const prefs = { theme: "dark", fontSize: "16px" };
+savePreferences(prefs);
+
+const loaded = loadPreferences();
+console.log(loaded);
