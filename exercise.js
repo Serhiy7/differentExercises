@@ -441,4 +441,4 @@ const prefs = { theme: "dark", fontSize: "16px" };
 savePreferences(prefs);
 
 const loaded = loadPreferences();
-console.log(loaded);
+// console.log(loaded);
