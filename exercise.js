@@ -417,28 +417,51 @@
 //   }
 // }
 
-function savePreferences(preferences) {
-  const jsonString = JSON.stringify(preferences);
-  localStorage.setItem("prefs", jsonString);
-}
+// function savePreferences(preferences) {
+//   const jsonString = JSON.stringify(preferences);
+//   localStorage.setItem("prefs", jsonString);
+// }
 
-function loadPreferences() {
-  const jsonString = localStorage.getItem("prefs");
+// function loadPreferences() {
+//   const jsonString = localStorage.getItem("prefs");
 
-  if (jsonString !== null) {
-    try {
-      return JSON.parse(jsonString);
-    } catch (e) {
-      console.warn("Could not parse prefs:", e);
-      return {};
-    }
+//   if (jsonString !== null) {
+//     try {
+//       return JSON.parse(jsonString);
+//     } catch (e) {
+//       console.warn("Could not parse prefs:", e);
+//       return {};
+//     }
+//   } else {
+//     return {};
+//   }
+// }
+
+// const prefs = { theme: "dark", fontSize: "16px" };
+// savePreferences(prefs);
+
+// const loaded = loadPreferences();
+// console.log(loaded);
+
+function toggleClass(element, className) {
+  if (element.classList.contains(className)) {
+    element.classList.remove(className);
   } else {
-    return {};
+    element.classList.add(className);
   }
+  return element;
 }
 
-const prefs = { theme: "dark", fontSize: "16px" };
-savePreferences(prefs);
+function toggleClass(element, className) {
+  element.classList.toggle(className);
+  return element;
+}
 
-const loaded = loadPreferences();
-console.log(loaded);
+const person = { firstName: "John", lastName: "Doe" };
+
+function getFullName({ firstName, lastName }) {
+  helloString = `Hello, ${firstName} ${lastName}!`;
+  console.log(helloString);
+}
+
+getFullName(person);
