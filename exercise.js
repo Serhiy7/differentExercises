@@ -443,14 +443,14 @@
 // const loaded = loadPreferences();
 // console.log(loaded);
 
-function toggleClass(element, className) {
-  if (element.classList.contains(className)) {
-    element.classList.remove(className);
-  } else {
-    element.classList.add(className);
-  }
-  return element;
-}
+// function toggleClass(element, className) {
+//   if (element.classList.contains(className)) {
+//     element.classList.remove(className);
+//   } else {
+//     element.classList.add(className);
+//   }
+//   return element;
+// }
 
 function toggleClass(element, className) {
   element.classList.toggle(className);
