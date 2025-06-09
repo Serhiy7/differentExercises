@@ -443,28 +443,28 @@
 // const loaded = loadPreferences();
 // console.log(loaded);
 
-function toggleClass(element, className) {
-  if (element.classList.contains(className)) {
-    element.classList.remove(className);
-  } else {
-    element.classList.add(className);
-  }
-  return element;
-}
+// function toggleClass(element, className) {
+//   if (element.classList.contains(className)) {
+//     element.classList.remove(className);
+//   } else {
+//     element.classList.add(className);
+//   }
+//   return element;
+// }
 
-function toggleClass(element, className) {
-  element.classList.toggle(className);
-  return element;
-}
+// function toggleClass(element, className) {
+//   element.classList.toggle(className);
+//   return element;
+// }
 
-const person = { firstName: "John", lastName: "Doe" };
+// const person = { firstName: "John", lastName: "Doe" };
 
-function getFullName({ firstName, lastName }) {
-  helloString = `Hello, ${firstName} ${lastName}!`;
-  console.log(helloString);
-}
+// function getFullName({ firstName, lastName }) {
+//   helloString = `Hello, ${firstName} ${lastName}!`;
+//   console.log(helloString);
+// }
 
-getFullName(person);
+// getFullName(person);
 
 async function fetchPostsAndComments() {
   try {
