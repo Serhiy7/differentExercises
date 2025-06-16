@@ -491,4 +491,4 @@ async function fetchPostsAndComments() {
   }
 }
 
-fetchPostsAndComments();
+// fetchPostsAndComments();
