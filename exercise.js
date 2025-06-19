@@ -457,14 +457,14 @@
 //   return element;
 // }
 
-const person = { firstName: "John", lastName: "Doe" };
+// const person = { firstName: "John", lastName: "Doe" };
 
-function getFullName({ firstName, lastName }) {
-  helloString = `Hello, ${firstName} ${lastName}!`;
-  console.log(helloString);
-}
+// function getFullName({ firstName, lastName }) {
+//   helloString = `Hello, ${firstName} ${lastName}!`;
+//   console.log(helloString);
+// }
 
-getFullName(person);
+// getFullName(person);
 
 async function fetchPostsAndComments() {
   try {
